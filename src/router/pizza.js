@@ -1,9 +1,9 @@
 import { Router } from 'express';
+import PizzaController from '../controllers/PizzaController.js';
 
 const pizzaRouter = Router();
 
-pizzaRouter.get('/', (req, res) => {
-	res.send('все пиццы получены');
-});
+pizzaRouter.post('/', PizzaController.createPizza);
+pizzaRouter.get('/', PizzaController.getAllPizza);
 
 export default pizzaRouter;
