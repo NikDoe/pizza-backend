@@ -1,8 +1,9 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import { AppDataSource } from './db.js';
 import router from './router/index.js';
+import sequelize from './db.js';
+import Pizza from './models/models.js';
 
 const app = express();
 const PORT = process.env.PORT || 9001;
@@ -13,12 +14,8 @@ app.use(express.json());
 
 const start = async () => {
 	try {
-		await AppDataSource.initialize()
-			.then(() => {
-				console.log('база данных подключена');
-			})
-			.catch(error => console.log(error));
-
+		await sequelize.authenticate();
+		await sequelize.sync();
 		await app.listen(PORT, () => {
 			console.log(`сервер запущен на порту ${PORT}`);
 		});
