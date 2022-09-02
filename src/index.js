@@ -30,3 +30,5 @@ const start = async () => {
 };
 
 start();
+
+console.log(1);
