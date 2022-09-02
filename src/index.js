@@ -19,7 +19,7 @@ const start = async () => {
 			.then(() => {
 				console.log('база данных подключена');
 			})
-			.catch((error) => console.log(error));
+			.catch(error => console.log(error));
 
 		await app.listen(PORT, () => {
 			console.log(`сервер запущен на порту ${PORT}`);
@@ -30,3 +30,5 @@ const start = async () => {
 };
 
 start();
+
+console.log(1);
