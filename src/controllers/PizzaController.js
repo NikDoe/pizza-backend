@@ -1,4 +1,5 @@
 import PizzaService from '../services/PizzaService.js';
+import { pizzaRepo } from '../utils/utils.js';
 
 class PizzaController {
 	async createPizza(req, res, next) {
@@ -12,7 +13,8 @@ class PizzaController {
 
 	async getAllPizza(req, res) {
 		try {
-			res.send('все пиццы получены');
+			const pizzas = await pizzaRepo.find();
+			res.json(pizzas);
 		} catch (e) {}
 	}
 }

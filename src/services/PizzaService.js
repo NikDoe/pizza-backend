@@ -1,9 +1,7 @@
-import { AppDataSource } from '../db.js';
-import Pizza from '../models/Pizza.js';
+import { pizzaRepo } from '../utils/utils.js';
 
 class PizzaService {
 	async createPizza(pizza) {
-		const pizzaRepo = await AppDataSource.getRepository(Pizza);
 		const newPizza = pizzaRepo.create(pizza);
 		await pizzaRepo.save(newPizza);
 		return newPizza;
