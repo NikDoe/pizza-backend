@@ -14,7 +14,9 @@ class PizzaController {
 		try {
 			const pizzas = await PizzaService.getAllPizza(req.query);
 			return res.json(pizzas);
-		} catch (e) {}
+		} catch (e) {
+			console.log(e)
+		}
 	}
 }
 

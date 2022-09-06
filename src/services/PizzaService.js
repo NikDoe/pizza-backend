@@ -1,4 +1,4 @@
-import { pizzaRepo } from '../utils/utils.js';
+import {pizzaRepo} from '../utils/utils.js';
 
 class PizzaService {
 	async createPizza(pizza) {
@@ -7,15 +7,24 @@ class PizzaService {
 		return newPizza;
 	}
 
-	async getAllPizza({category}) {
+	async getAllPizza({category, sortBy, order}) {
 		let allPizzas;
-		if (!category) {
-			allPizzas = await  pizzaRepo.find();
+		if (!category && !sortBy) {
+			allPizzas = await pizzaRepo.find()
 		}
-		if(category) {
+		if (category && !sortBy) {
 			allPizzas = await pizzaRepo.findBy({category})
 		}
+
+		if (!category && sortBy) {
+			allPizzas = await pizzaRepo.find({order: {[sortBy]: order}})
+		}
+		if (category && sortBy) {
+			allPizzas = await pizzaRepo.find({where:{category}, order: {[sortBy]: order}})
+		}
+
 		return allPizzas;
+
 	}
 }
 
