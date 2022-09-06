@@ -6,6 +6,17 @@ class PizzaService {
 		await pizzaRepo.save(newPizza);
 		return newPizza;
 	}
+
+	async getAllPizza({category}) {
+		let allPizzas;
+		if (!category) {
+			allPizzas = await  pizzaRepo.find();
+		}
+		if(category) {
+			allPizzas = await pizzaRepo.findBy({category})
+		}
+		return allPizzas;
+	}
 }
 
 export default new PizzaService();

@@ -1,8 +1,7 @@
 import PizzaService from '../services/PizzaService.js';
-import { pizzaRepo } from '../utils/utils.js';
 
 class PizzaController {
-	async createPizza(req, res, next) {
+	async createPizza(req, res) {
 		try {
 			const pizza = await PizzaService.createPizza(req.body);
 			res.send(pizza);
@@ -13,8 +12,8 @@ class PizzaController {
 
 	async getAllPizza(req, res) {
 		try {
-			const pizzas = await pizzaRepo.find();
-			res.json(pizzas);
+			const pizzas = await PizzaService.getAllPizza(req.query);
+			return res.json(pizzas);
 		} catch (e) {}
 	}
 }
