@@ -14,16 +14,16 @@ class PizzaService {
 		const take = limit || 4;
 		const skip = currentPage * take - take;
 		if (!category && !sortBy && !search) {
-			allPizzas = await pizzaRepo.find({skip, take});
+			allPizzas = await pizzaRepo.findAndCount({skip, take});
 		}
 		if (category && sortBy && !search) {
-			allPizzas = await pizzaRepo.find({where: {category}, order: {[sortBy]: order}, skip, take});
+			allPizzas = await pizzaRepo.findAndCount({where: {category}, order: {[sortBy]: order}, skip, take});
 		}
 		if (!category && sortBy && !search) {
-			allPizzas = await pizzaRepo.find({order: {[sortBy]: order}, skip, take});
+			allPizzas = await pizzaRepo.findAndCount({order: {[sortBy]: order}, skip, take});
 		}
 		if (!category && sortBy && search) {
-			allPizzas = await pizzaRepo.find({
+			allPizzas = await pizzaRepo.findAndCount({
 				where: {title: ILike(`%${search}%`)},
 				order: {[sortBy]: order},
 				skip,
@@ -31,7 +31,7 @@ class PizzaService {
 			});
 		}
 		if (category && sortBy && search) {
-			allPizzas = await pizzaRepo.find({
+			allPizzas = await pizzaRepo.findAndCount({
 				where: {category, title: ILike(`%${search}%`)},
 				order: {[sortBy]: order},
 				skip,
