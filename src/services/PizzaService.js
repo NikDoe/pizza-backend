@@ -1,5 +1,5 @@
 import { pizzaRepo } from '../utils/utils.js';
-import {Like} from "typeorm";
+import {ILike} from "typeorm";
 
 class PizzaService {
 	async createPizza (pizza) {
@@ -20,10 +20,10 @@ class PizzaService {
 			allPizzas = await pizzaRepo.find({order: { [sortBy]: order } });
 		}
 		if (!category && sortBy && search) {
-			allPizzas = await pizzaRepo.find({ where: { title: Like(`%${search}%`) }, order: { [sortBy]: order } });
+			allPizzas = await pizzaRepo.find({ where: { title: ILike(`%${search}%`) }, order: { [sortBy]: order } });
 		}
 		if (category && sortBy && search) {
-			allPizzas = await pizzaRepo.find({ where: { category, title: Like(`%${search}%`) }, order: { [sortBy]: order } });
+			allPizzas = await pizzaRepo.find({ where: { category, title: ILike(`%${search}%`) }, order: { [sortBy]: order } });
 		}
 
 		return allPizzas;
