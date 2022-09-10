@@ -25,9 +25,7 @@ class PizzaService {
 		if (!category && sortBy && search) {
 			allPizzas = await pizzaRepo.findAndCount({
 				where : { title: ILike(`%${search}%`) },
-				order : { [sortBy]: order },
-				skip,
-				take
+				order : { [sortBy]: order }
 			});
 		}
 		if (category && sortBy && search) {
