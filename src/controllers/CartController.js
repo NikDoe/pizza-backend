@@ -1,28 +1,27 @@
-import {cartRepo} from "../utils/utils.js";
+import { cartRepo } from '../utils/utils.js';
 
 class CartController {
-	async addPizzaToCart(req, res) {
+	async addPizzaToCart (req, res) {
 		try {
-			const {pizzaId, src, title, type, size, price} = req.body;
-			const newItem = await cartRepo.create({pizzaId, src, title, type, size, price})
+			const { pizzaId, src, title, type, size, price } = req.body;
+			const newItem = await cartRepo.create({ pizzaId, src, title, type, size, price });
 			await cartRepo.save(newItem);
 			return res.json(newItem);
 		} catch (e) {
-			throw new Error(e)
+			throw new Error(e);
 		}
-
 	}
 
-	async getCart(req, res) {
+	async getCart (req, res) {
 		const cart = await cartRepo.find();
 		return res.json(cart);
 	}
 
-	async updatePizzaInCart(req, res) {
-		const {pizzaId, title, type, size} = req.body;
-		const existPizza = await cartRepo.findOne({where: {pizzaId, title, type, size}});
+	async updatePizzaInCart (req, res) {
+		const { pizzaId, title, type, size } = req.body;
+		const existPizza = await cartRepo.findOne({ where: { pizzaId, title, type, size } });
 		const updateCount = existPizza.count + 1;
-		await cartRepo.update(existPizza, {count: updateCount})
+		await cartRepo.update(existPizza, { count: updateCount });
 		return res.json(updateCount);
 	}
 }
