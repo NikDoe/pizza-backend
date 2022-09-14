@@ -21,7 +21,7 @@ const start = async () => {
 			})
 			.catch((error) => console.log(error));
 
-		await app.listen(PORT, () => {
+		app.listen(PORT, () => {
 			console.log(`сервер запущен на порту ${PORT}`);
 		});
 	} catch (e) {
