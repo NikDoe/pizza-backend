@@ -1,35 +1,35 @@
-import { EntitySchema } from 'typeorm';
+import {EntitySchema} from 'typeorm';
 
 export default new EntitySchema({
-	name      : 'Cart',
-	tableName : 'CartItems',
-	columns   : {
-		id      : {
-			primary   : true,
-			type      : 'int',
-			generated : true
+	name: 'Cart',
+	tableName: 'CartItems',
+	columns: {
+		id: {
+			primary: true,
+			type: 'int',
+			generated: true
 		},
-		pizzaId : {
-			type : 'int'
+		pizzaId: {
+			type: 'int'
 		},
-		src     : {
-			type : 'text'
+		src: {
+			type: 'text'
 		},
-		title   : {
-			type : 'varchar'
+		title: {
+			type: 'varchar'
 		},
-		type    : {
-			type : 'int'
+		type: {
+			type: 'text'
 		},
-		size    : {
-			type : 'int'
+		size: {
+			type: 'int'
 		},
-		price   : {
-			type : 'real'
+		price: {
+			type: 'real'
 		},
-		count   : {
-			type    : 'int',
-			default : 1
+		count: {
+			type: 'int',
+			default: 1
 		}
 	}
 });
