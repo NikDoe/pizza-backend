@@ -21,8 +21,7 @@ class CartController {
 		const { pizzaId, title, type, size } = req.body;
 		const existPizza = await cartRepo.findOne({ where: { pizzaId, title, type, size } });
 		const updateCount = existPizza.count + 1;
-		await cartRepo.update(existPizza, { count: updateCount });
-		return res.json(updateCount);
+		return res.json(await cartRepo.save({ ...existPizza, count: updateCount }));
 	}
 }
 
